@@ -84,7 +84,7 @@ aside{width:340px!important}aside label.gl{display:flex;align-items:center;gap:1
 <h2>Font</h2>
 <label>Font family</label><select id="font"></select>
 <label>Font size (pt)</label><input id="size" type="number" min="8" max="24" step="0.5">
-<label><input id="pnum" type="checkbox" style="width:auto"> Page number dekhao</label>
+<label><input id="pnum" type="checkbox" style="width:auto"> Page number dekhao (cover bad, porer page theke 1 / i)</label><label>Number type</label><select id="pnf"></select>
 <div class="row" id="fmt"></div>
 <p style="font-size:11px;color:var(--mu);margin:4px 0 0">Text select kore B / I / U / align dao. Block er left e ✥ ashbe, oita drag kore jekhane khushi move koro. Pic er kone ◢ drag kore boro/choto koro, pic er upor drag kore move koro. Page bhore gele text/pic auto porer page e chole jabe.</p>
 <h2>Page setup</h2>
@@ -310,12 +310,13 @@ const m=merge(JSON.parse(JSON.stringify(flat))),i=m.findIndex(x=>x.id===b.id),j=
 if(i<0||j<0||j>=m.length)return;
 [m[i],m[j]]=[m[j],m[i]];S.pages.splice(s,e-s,{auto:false,blocks:m});render()}
 function delBlock(b){S.pages.forEach(pg=>{pg.blocks=pg.blocks.filter(x=>x.id!==b.id)});render()}
+function fmtNum(n){const f=S.pnf||"num";if(f=="num")return String(n);const R=[[1000,"M"],[900,"CM"],[500,"D"],[400,"CD"],[100,"C"],[90,"XC"],[50,"L"],[40,"XL"],[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]];let r="";for(const[v,s]of R)while(n>=v){r+=s;n-=v}return f=="roman"?r.toLowerCase():r}
 function pages(){const root=$("#pg");root.innerHTML="";
 S.pages.forEach((pg,p)=>{
-const bar=el("div","pgbar",`<span>Page ${p+2}${pg.auto?" (auto - ager page er text/jinis choliye ashche)":""}</span>`);
+const bar=el("div","pgbar",`<span>Page ${fmtNum(p+1)}${pg.auto?" (auto - ager page er text/jinis choliye ashche)":""}</span>`);
 if(!pg.auto)bar.append(btn("Page delete",()=>{if(S.pages.filter(x=>!x.auto).length>1&&confirm("Ei page (ar er overflow page gula) delete korbe?")){let e=p+1;while(e<S.pages.length&&S.pages[e].auto)e++;S.pages.splice(p,e-p);render()}}));
 const page=el("div","page");pg.blocks.forEach(b=>page.append(blockEl(b)));
-if(S.pnum)page.append(el("div","pn",String(p+2)));
+if(S.pnum)page.append(el("div","pn",fmtNum(p+1)));
 const ab=el("div","addbar");ab.append(btn("+ Text",()=>add(p,"text")),btn("+ Heading",()=>add(p,"h")),btn("+ Picture",()=>add(p,"img")),btn("+ Table",()=>add(p,"tbl")));
 root.append(bar,page,ab)});
 look()}
@@ -324,6 +325,7 @@ function init(){
 const f=$("#font");opt(f,FONTS.map(([n,v])=>[v,n]),S.font);f.onchange=()=>{S.font=f.value;look();relayout(false);save()};
 const sz=$("#size");sz.value=S.size;sz.oninput=()=>{S.size=+sz.value||12;look();sched();save()};
 const pn=$("#pnum");pn.checked=S.pnum;pn.onchange=()=>{S.pnum=pn.checked;render()};
+const pf=$("#pnf");opt(pf,[["num","Number (1, 2, 3)"],["roman","Roman small (i, ii, iii)"],["ROMAN","Roman capital (I, II, III)"]],S.pnf||"num");pf.onchange=()=>{S.pnf=pf.value;render()};
 [["B","bold"],["I","italic"],["U","underline"],["⇤","justifyLeft"],["≡","justifyCenter"],["⇥","justifyRight"],["☰","justifyFull"]].forEach(([l,c])=>{const b=btn(l,()=>document.execCommand(c));b.onmousedown=e=>e.preventDefault();$("#fmt").append(b)});
 const ps=$("#psz");opt(ps,Object.entries(PS).map(([k,v])=>[k,v[2]+" ("+v[0]+" x "+v[1]+" mm)"]),S.pg);ps.onchange=()=>{S.pg=ps.value;render()};
 const M4={t:$("#mt"),b:$("#mb"),l:$("#ml"),r:$("#mr")};
