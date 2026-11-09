@@ -22,7 +22,7 @@ button:hover{background:var(--ab)}
 button.pri{background:var(--ac);color:#fff;border-color:var(--ac)}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
 main{flex:1;min-width:0;overflow-x:auto;padding:20px 12px 60px}
-.page{width:210mm;min-height:297mm;background:#fff;color:#000;margin:0 auto 22px;padding:18mm 20mm 22mm;position:relative;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.page{width:210mm;height:297mm;background:#fff;color:#000;margin:0 auto 22px;padding:18mm 20mm 22mm;position:relative;box-shadow:0 2px 12px rgba(0,0,0,.25)}#pg .page{margin-bottom:6px}
 .pn{position:absolute;bottom:8mm;left:0;right:0;text-align:center;font-size:.85em}
 .pgbar{display:flex;justify-content:space-between;align-items:center;width:210mm;margin:0 auto 6px;color:var(--mu);font-size:12px}
 .blk{position:relative;margin:0 0 .8em;border-radius:4px}
@@ -31,11 +31,11 @@ main{flex:1;min-width:0;overflow-x:auto;padding:20px 12px 60px}
 .tb select,.tb input[type=range]{width:auto;font-size:12px;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:5px}
 .tb button{padding:2px 8px}
 .blk:hover>.tb,.blk:focus-within>.tb{display:flex}
-.ed{outline:none;min-height:1.4em;white-space:pre-wrap;text-align:justify}
+.ed{outline:none;min-height:1.4em;white-space:pre-wrap;text-align:justify;overflow-wrap:break-word}
 .ed:empty:before{content:attr(data-ph);color:#9aa3af}
 .hd{font-weight:700;font-size:1.25em}
-.fig{margin:0;text-align:center}
-.fig img{max-width:100%;display:block;margin:0 auto}
+.fig{margin:0;text-align:center;position:relative;left:50%;transform:translateX(-50%)}
+.fig img{width:100%;height:auto;display:block;margin:0;cursor:move;touch-action:none;user-select:none;-webkit-user-drag:none}
 .fig .ed{text-align:center;font-size:.9em;margin-top:4px}
 .up{border:2px dashed #9aa3af;padding:30px;color:#6b7280;border-radius:6px;background:#fff}
 .ib{display:flex;gap:14px;align-items:flex-start}
@@ -45,8 +45,8 @@ table{border-collapse:collapse;width:100%;margin-top:4px}
 td,th{border:1px solid #000;padding:4px 7px;min-width:40px;outline:none;vertical-align:top}
 th{background:#f1f1f1}
 .tcap{text-align:center;font-weight:600;margin-bottom:2px}
-.addbar{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;padding-top:10px;border-top:1px dashed #bbb}
-.addbar button{background:#fff;color:#222;border-color:#bbb}
+.addbar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:0 auto 22px;padding:6px 0 0}
+.addbar button{background:var(--pn);color:var(--tx);border-color:var(--bd)}
 .cv{text-align:left}
 .cv .lg{display:block;margin:0 auto;height:34mm}
 .cv .u{text-align:center;font-weight:700;font-size:1.15em;margin-top:4px}
@@ -66,8 +66,15 @@ aside{width:340px!important}aside label.gl{display:flex;align-items:center;gap:1
 @media (prefers-reduced-motion:reduce){.w,#sp1 .by,#sp1 small{animation:none;opacity:1;transform:none}#sp1 .ln{animation:none;width:200px}}
 .mv{cursor:move;touch-action:none}.mv.sel{outline:1.5px dashed #2563eb;outline-offset:2px}.tb{font-size:13px}.cv .tn{font-weight:700;font-size:1.1em;font-family:Arial,Helvetica,sans-serif}.cv .sm{font-size:.7em}.cv .mb{margin-bottom:.6em}
 @media (max-width:900px){.app{flex-direction:column}aside{width:100%;height:auto;position:static;border-right:0;border-bottom:1px solid var(--bd)}}
-@media print{#sp1{display:none!important}html,body{background:#fff}aside,.pgbar,.addbar,.tb{display:none!important}main{padding:0;overflow:visible}.page{margin:0;box-shadow:none;width:210mm;height:297mm;min-height:0;overflow:hidden;page-break-after:always}.blk{outline:none!important}.up{display:none}@page{size:A4;margin:0}}
-</style></head>
+
+#meas{position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none}
+.grip{position:absolute;left:-28px;top:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--ac);color:#fff;border-radius:6px;cursor:move;touch-action:none;font-size:14px;opacity:.35;user-select:none;z-index:4}
+.blk:hover>.grip,.blk:focus-within>.grip{opacity:1}
+.imw{position:relative}
+.rs{position:absolute;right:-8px;bottom:-8px;width:20px;height:20px;border-radius:50%;background:var(--ac);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:nwse-resize;touch-action:none;z-index:4;user-select:none}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 8px}
+@media print{#sp1{display:none!important}html,body{background:#fff}aside,.pgbar,.addbar,.tb,.grip,.rs{display:none!important}main{padding:0;overflow:visible}.page,#pg .page{margin:0!important;box-shadow:none;overflow:hidden;page-break-after:always;break-after:page}.page.last{page-break-after:auto;break-after:auto}.blk{outline:none!important}.up{display:none}.ed:empty:before{content:none}}
+</style><style id="pgst"></style></head>
 <body>
 <div id="sp1"><h1 id="sh"></h1><div class="ln"></div><div class="by">by MD Ashrafuzzaman Akash</div><small>Click kore dhuko</small></div>
 <div class="app">
@@ -79,7 +86,11 @@ aside{width:340px!important}aside label.gl{display:flex;align-items:center;gap:1
 <label>Font size (pt)</label><input id="size" type="number" min="8" max="24" step="0.5">
 <label><input id="pnum" type="checkbox" style="width:auto"> Page number dekhao</label>
 <div class="row" id="fmt"></div>
-<p style="font-size:11px;color:var(--mu);margin:4px 0 0">Text select kore B / I / U / align dao. Page er block e hover korle ✥ (drag kore move), A− A+ (size) ashbe.</p>
+<p style="font-size:11px;color:var(--mu);margin:4px 0 0">Text select kore B / I / U / align dao. Block er left e ✥ ashbe, oita drag kore jekhane khushi move koro. Pic er kone ◢ drag kore boro/choto koro, pic er upor drag kore move koro. Page bhore gele text/pic auto porer page e chole jabe.</p>
+<h2>Page setup</h2>
+<label>Page size</label><select id="psz"></select>
+<label>Margin (mm) - sob dik ek shathe</label><input id="mall" type="number" min="0" max="60" step="1" placeholder="Sob dik">
+<div class="g2"><div><label>Upore (Top)</label><input id="mt" type="number" min="0" max="60" step="1"></div><div><label>Niche (Bottom)</label><input id="mb" type="number" min="0" max="60" step="1"></div><div><label>Left</label><input id="ml" type="number" min="0" max="60" step="1"></div><div><label>Right</label><input id="mr" type="number" min="0" max="60" step="1"></div></div>
 <h2>Report type</h2><select id="rt"><option value="lab">Lab report</option><option value="cep">CEP report</option><option value="other">Onno report</option></select><label class="gl"><input id="grp" type="checkbox" style="width:22px;height:22px"> Group report (onek member)</label><h2>Cover page</h2><p style="font-size:11px;color:var(--mu);margin:0 0 4px">Cover er jekono text/logo click kore drag koro, size niche theke change koro.</p><div class="row" style="align-items:center"><b id="spl" style="font-size:12px;max-width:110px;overflow:hidden;white-space:nowrap">(kichu select nai)</b><button id="szm">A−</button><input id="szv" type="number" style="width:64px"><button id="szp">A+</button><button id="szr">Reset</button></div><div id="mem"></div>
 <div id="cf"></div>
 <label>Logo change</label><input id="lgf" type="file" accept="image/*">
@@ -95,20 +106,48 @@ const LOGO="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDA
 const $=s=>document.querySelector(s);
 const FONTS=[["Times New Roman","'Times New Roman',Times,serif"],["Arial","Arial,Helvetica,sans-serif"],["Calibri","Calibri,Carlito,'Segoe UI',sans-serif"],["Cambria","Cambria,Georgia,serif"],["Georgia","Georgia,serif"],["Verdana","Verdana,Geneva,sans-serif"],["Tahoma","Tahoma,Geneva,sans-serif"],["Courier New","'Courier New',monospace"]];
 const CF=[["uni","University"],["dept","Department"],["code","Course code"],["title","Course title"],["exp","Experiment no","lab"],["expTitle","Experiment name (long)","lab"],["rtitle","Report title","non"],["gn","Group name / no","grp"],["name","Submitted by: name","ind"],["id","Student ID","ind"],["toName","Submitted to: name"],["toDept","Teacher department"],["toUni","Teacher university"]];
-const def=()=>({font:FONTS[0][1],size:12,pnum:true,logo:LOGO,type:"lab",group:false,cs:{},members:[{name:"",id:""}],cover:{uni:"University of Asia Pacific",dept:"Department of Electrical & Electronic Engineering (EEE)",code:"EEE 318",title:"Control Systems I Sessional",exp:"09",expTitle:"PID Design Method for DC Motor Speed Control using MATLAB. (Open ended lab)",name:"Md Ashrafuzzaman Akash",id:"23208032",toName:"Kazi Mahtab Kadir",toDept:"Department of EEE",toUni:"University of Asia Pacific",rtitle:"",gn:""},pages:[{blocks:[{t:"h",h:"Objective"},{t:"text",h:""}]}]});
+const def=()=>({font:FONTS[0][1],size:12,pnum:true,logo:LOGO,type:"lab",group:false,pg:"a4",mg:{t:18,r:20,b:22,l:20},cs:{},members:[{name:"",id:""}],cover:{uni:"University of Asia Pacific",dept:"Department of Electrical & Electronic Engineering (EEE)",code:"EEE 318",title:"Control Systems I Sessional",exp:"09",expTitle:"PID Design Method for DC Motor Speed Control using MATLAB. (Open ended lab)",name:"Md Ashrafuzzaman Akash",id:"23208032",toName:"Kazi Mahtab Kadir",toDept:"Department of EEE",toUni:"University of Asia Pacific",rtitle:"",gn:""},pages:[{blocks:[{t:"h",h:"Objective"},{t:"text",h:""}]}]});
 let S;
 try{S=JSON.parse(localStorage.getItem("labrep1"))}catch(e){}
 if(!S||!S.pages)S=def();
 if(S.lv!=2){S.logo=LOGO;S.lv=2}
 if(!S.type){S.type="lab";S.group=false;S.cs={};S.members=[{name:S.cover.name,id:S.cover.id}];S.cover.rtitle="";S.cover.gn=""}
-let tmr;
+const K=96/25.4;
+const PS={a2:[420,594,"A2"],a3:[297,420,"A3"],a4:[210,297,"A4"],a5:[148,210,"A5"],b4:[250,353,"B4"],b5:[176,250,"B5"],letter:[215.9,279.4,"Letter"],legal:[215.9,355.6,"Legal"],tabloid:[279.4,431.8,"Tabloid (11x17 in)"]};
+let _u=0;const uid=()=>"b"+Date.now().toString(36)+(++_u);
+if(!PS[S.pg])S.pg="a4";
+if(!S.mg||typeof S.mg!="object")S.mg={t:18,r:20,b:22,l:20};
+S.pages.forEach(pg=>{const nb=[];(pg.blocks||[]).forEach(b=>{if(!b.id)b.id=uid();nb.push(b);if(b.t=="img"){const tx=b.h;delete b.h;delete b.l;if(tx&&tx.replace(/<[^>]*>|&nbsp;|\s/g,""))nb.push({id:uid(),t:"text",h:tx})}});pg.blocks=nb});
+let tmr,st,comp=false;
 function save(){clearTimeout(tmr);tmr=setTimeout(()=>{try{localStorage.setItem("labrep1",JSON.stringify(S))}catch(e){}},300)}
+document.addEventListener("compositionstart",()=>{comp=true},true);
+document.addEventListener("compositionend",()=>{comp=false;sched()},true);
+function sched(){clearTimeout(st);st=setTimeout(function f(){if(comp){st=setTimeout(f,300);return}relayout(false)},350)}
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
 function btn(t,fn,title){const b=el("button","",t);b.title=title||"";b.onclick=fn;return b}
-function ed(html,cb,ph){const d=el("div","ed",html);d.contentEditable=true;d.dataset.ph=ph||"";d.oninput=()=>{cb(d.innerHTML);save()};return d}
+function ed(html,cb,ph,k){const d=el("div","ed",html);d.contentEditable=true;d.dataset.ph=ph||"";d._k=k;
+d.oninput=()=>{cb(d.innerHTML);save();sched()};
+d.onkeydown=e=>{if(e.key==="Enter"&&!e.isComposing){e.preventDefault();if(!document.execCommand("insertLineBreak"))document.execCommand("insertHTML",false,"<br>")}};
+d.onpaste=e=>{e.preventDefault();const t=(e.clipboardData||window.clipboardData).getData("text/plain");document.execCommand("insertHTML",false,esc(t).replace(/\r?\n/g,"<br>"))};
+return d}
 function opt(sel,list,cur){list.forEach(([v,l])=>{const o=el("option","",l);o.value=v;if(v==cur)o.selected=true;sel.append(o)})}
-function shrink(file,cb){const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1400/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.85))};im.src=r.result};r.readAsDataURL(file)}
+function shrink(file,cb){const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1800/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.85),c.width,c.height)};im.src=r.result};r.readAsDataURL(file)}
+function ensureDims(){const ps=[];S.pages.forEach(pg=>pg.blocks.forEach(b=>{if(b.t=="img"&&b.src&&!b.nw)ps.push(new Promise(res=>{const im=new Image();im.onload=()=>{b.nw=im.naturalWidth;b.nh=im.naturalHeight;res()};im.onerror=res;im.src=b.src}))}));return Promise.all(ps)}
+/* ---- text unit helpers: 1 unit = 1 text char or 1 <br> ---- */
+function ulen(root){let n=0;const w=document.createTreeWalker(root,5);let x;while(x=w.nextNode()){if(x.nodeType==3)n+=x.data.length;else if(x.nodeName=="BR")n++}return n}
+function ulenH(h){const d=document.createElement("div");d.innerHTML=h;return ulen(d)}
+function flatTxt(root){let s="";const w=document.createTreeWalker(root,5);let x;while(x=w.nextNode()){if(x.nodeType==3)s+=x.data;else if(x.nodeName=="BR")s+="\n"}return s}
+function locate(root,k){if(k<=0)return[root,0];const w=document.createTreeWalker(root,5);let x,acc=0;
+while(x=w.nextNode()){if(x.nodeType==3){const L=x.data.length;if(k<=acc+L)return[x,k-acc];acc+=L}else if(x.nodeName=="BR"){if(k<=acc+1)return[x.parentNode,Array.prototype.indexOf.call(x.parentNode.childNodes,x)+1];acc++}}
+return[root,root.childNodes.length]}
+function clean(d){let ch=true;while(ch){ch=false;d.querySelectorAll("*").forEach(e=>{if(e.nodeName!="BR"&&e.nodeName!="IMG"&&!e.textContent&&!e.querySelector("br,img")){e.remove();ch=true}})}}
+function norm(h){const t=document.createElement("div");t.innerHTML=h;t.querySelectorAll("div,p").forEach(n=>{const f=document.createDocumentFragment();while(n.firstChild)f.append(n.firstChild);if(n.nextSibling&&!(f.childNodes.length==1&&f.firstChild.nodeName=="BR"))f.append(document.createElement("br"));n.replaceWith(f)});return t.innerHTML}
+function part(root,a,b){const r=document.createRange(),s=locate(root,a),e=locate(root,b);r.setStart(s[0],s[1]);r.setEnd(e[0],e[1]);const d=document.createElement("div");d.append(r.cloneContents());clean(d);return d.innerHTML}
+function geom(){const[W,H]=PS[S.pg]||PS.a4,g=S.mg||{};const cl=(v,mx)=>Math.max(0,Math.min(mx,+v||0));
+const mt=cl(g.t,(H-40)/2),mb=cl(g.b,(H-40)/2),ml=cl(g.l,(W-40)/2),mr=cl(g.r,(W-40)/2);
+return{W,H,mt,mb,ml,mr,cw:W-ml-mr,ch:H-mt-mb}}
+let meas;function setMeas(G){if(!meas){meas=document.createElement("div");meas.id="meas";document.body.append(meas)}meas.style.cssText=`width:${G.cw}mm;font-family:${S.font};font-size:${S.size}pt`}
 let sel=null;
 const TF=k=>{const o=S.cs[k]||{};return (o.dx||o.dy)?`transform:translate(${o.dx||0}px,${o.dy||0}px);`:""};
 function M(k,cls,html){const o=S.cs[k]||{};return `<div class="mv ${cls||""}${sel==k?" sel":""}" data-k="${k}" style="${o.fs?`font-size:${o.fs}pt;`:""}${TF(k)}">${html}</div>`}
@@ -125,66 +164,182 @@ function setFs(v){if(!sel||!v)return;const o=S.cs[sel]=S.cs[sel]||{};o.fs=Math.m
 function form(){const f=$("#cf");f.innerHTML="";const T=S.type;
 CF.forEach(([k,l,g])=>{if((g=="lab"&&T!="lab")||(g=="non"&&T=="lab")||(g=="grp"&&!S.group)||(g=="ind"&&S.group))return;const i=k=="expTitle"?el("textarea"):el("input");i.value=S.cover[k];i.oninput=()=>{S.cover[k]=i.value;cover();save()};f.append(el("label","",l),i)});
 const m=$("#mem");m.innerHTML="";if(S.group){S.members.forEach((x,i)=>{const r=el("div","mc",`<b>Member ${i+1}</b>`),a=el("input"),b=el("input");a.placeholder="Name";b.placeholder="ID";a.value=x.name;b.value=x.id;a.oninput=()=>{x.name=a.value;cover();save()};b.oninput=()=>{x.id=b.value;cover();save()};r.append(a,b,btn("✕",()=>{if(S.members.length>1){S.members.splice(i,1);form();cover();save()}}));m.append(r)});m.append(btn("+ Member",()=>{S.members.push({name:"",id:""});form();cover();save()}))}}
-function coverOld(){const c=S.cover,e=esc;$("#cvp").innerHTML=`<div class="cv"><img class="lg" src="${S.logo}" alt=""><div class="u">${e(c.uni)}</div><div class="d">${e(c.dept)}</div><div class="ci"><div>Course Code: ${e(c.code)}</div><div>Course Title: ${e(c.title)}</div><div>Experiment No: ${e(c.exp)}</div><div>${e(c.expTitle)}</div></div><div class="sb">Submitted By:<b class="nm">${e(c.name)}</b><div>ID:${e(c.id)}</div></div><div class="st">Submitted To:<b>${e(c.toName)}</b><small>${e(c.toDept)}</small><small>${e(c.toUni)}</small></div></div>`}
-function look(){const m=$("#cvp").style,p=$("#pg").style;[m,p].forEach(s=>{s.fontFamily=S.font;s.fontSize=S.size+"pt"});$("#pg").querySelectorAll(".page").forEach(x=>{x.style.fontFamily=S.font;x.style.fontSize=S.size+"pt"})}
-function mv(p,i,d){const a=S.pages[p].blocks,j=i+d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];render()}
-function add(p,t){const B={text:{t:"text",h:""},h:{t:"h",h:""},img:{t:"img",src:"",cap:"Fig: ",h:"",l:"pt",w:70},tbl:{t:"tbl",cap:"Table: ",c:[["Parameter","Value"],["",""],["",""]]}};S.pages[p].blocks.push(JSON.parse(JSON.stringify(B[t])));render()}
-function blockEl(p,i){
-const b=S.pages[p].blocks[i],w=el("div","blk"),tb=el("div","tb");
+function look(){const G=geom();
+[$("#cvp"),...document.querySelectorAll("#pg .page")].forEach(x=>{const s=x.style;s.width=G.W+"mm";s.height=G.H+"mm";s.padding=`${G.mt}mm ${G.mr}mm ${G.mb}mm ${G.ml}mm`;s.fontFamily=S.font;s.fontSize=S.size+"pt"});
+document.querySelectorAll("#pg .pn").forEach(x=>x.style.bottom=Math.max(2,G.mb/2-2)+"mm");
+document.querySelectorAll(".pgbar,.addbar").forEach(x=>x.style.width=G.W+"mm");
+document.querySelectorAll("#pg .page").forEach((x,i,a)=>x.classList.toggle("last",i==a.length-1));
+$("#pgst").textContent=`@page{size:${G.W}mm ${G.H}mm;margin:0}`}
+function pieces(b){return S.pages.flatMap(pg=>pg.blocks.filter(x=>x.id===b.id))}
+function drag(h,b,ap){h.style.touchAction="none";
+h.onpointerdown=ev=>{if(ev.button)return;ev.preventDefault();ev.stopPropagation();const x0=ev.clientX-(b.dx||0),y0=ev.clientY-(b.dy||0);h.setPointerCapture(ev.pointerId);
+h.onpointermove=e=>{b.dx=e.clientX-x0;b.dy=e.clientY-y0;ap()};
+const up=()=>{h.onpointermove=null;h.onpointerup=null;h.onpointercancel=null;save()};h.onpointerup=up;h.onpointercancel=up};
+h.ondblclick=()=>{b.dx=b.dy=0;ap();save()}}
+function blockEl(b,o){
+o=o||{};const w=el("div","blk"),G=geom(),tb=o.ro?null:el("div","tb");
 const ap=()=>{w.style.fontSize=b.fs?b.fs+"pt":"";w.style.transform=(b.dx||b.dy)?`translate(${b.dx||0}px,${b.dy||0}px)`:""};ap();
-const fz=d=>()=>{b.fs=Math.max(6,Math.min(60,(b.fs||S.size)+d));ap();save()};
-const hd=btn("✥",()=>{},"Drag kore move (double click = reset)");hd.style.cssText="cursor:move;touch-action:none";
-hd.onpointerdown=ev=>{ev.preventDefault();const x0=ev.clientX-(b.dx||0),y0=ev.clientY-(b.dy||0);hd.setPointerCapture(ev.pointerId);hd.onpointermove=e=>{b.dx=e.clientX-x0;b.dy=e.clientY-y0;ap()};hd.onpointerup=()=>{hd.onpointermove=null;save()}};
-hd.ondblclick=()=>{b.dx=b.dy=0;ap();save()};
-tb.append(hd,btn("A−",fz(-1),"Font choto"),btn("A+",fz(1),"Font boro"),btn("↑",()=>mv(p,i,-1),"Upore"),btn("↓",()=>mv(p,i,1),"Niche"));
+const mk=(kind,h,cb,ph)=>ed(h,cb,ph,{b,kind});
 let body;
-if(b.t=="text"||b.t=="h"){body=ed(b.h,v=>b.h=v,b.t=="h"?"Heading...":"Likho...");if(b.t=="h")body.classList.add("hd")}
+if(b.t=="text"||b.t=="h"){body=mk("t",b.h,v=>b.h=v,b.t=="h"?"Heading...":"Likho...");if(b.t=="h")body.classList.add("hd")}
 else if(b.t=="img"){
-const sel=el("select");opt(sel,[["pt","Pic upore, text niche"],["tp","Text upore, pic niche"],["l","Pic left, text right"],["r","Text left, pic right"]],b.l);sel.onchange=()=>{b.l=sel.value;render()};
-const rg=el("input");rg.type="range";rg.min=20;rg.max=100;rg.value=b.w;rg.title="Pic size";
-tb.prepend(sel,rg);
-const fig=el("figure","fig");fig.style.width=b.w+"%";if(b.l=="l"||b.l=="r")fig.style.flex="none";
-rg.oninput=()=>{b.w=+rg.value;fig.style.width=b.w+"%";save()};
-const fi=el("input");fi.type="file";fi.accept="image/*";fi.hidden=true;fi.onchange=()=>{if(fi.files[0])shrink(fi.files[0],u=>{b.src=u;render()})};
-if(b.src){const im=el("img");im.src=b.src;im.alt="";im.onclick=()=>fi.click();im.title="Click kore pic change";fig.append(im)}
-else{const u=el("div","up","Pic upload korte click koro");u.onclick=()=>fi.click();fig.append(u)}
-fig.append(fi,ed(b.cap,v=>b.cap=v,"Caption"));
-const tx=ed(b.h,v=>b.h=v,"Pic er text (optional)");
-body=el("div","ib"+(b.l=="pt"||b.l=="tp"?" c":""));
-if(b.l=="pt"||b.l=="l")body.append(fig,tx);else body.append(tx,fig);
-if(b.l=="pt"||b.l=="tp")fig.style.margin="0 auto";
+const maxPct=G.W/G.cw*100,hmax=G.ch*K-60;
+const fit=v=>{v=Math.max(5,Math.min(v,maxPct));if(b.nw&&b.nh){const lim=hmax*b.nw/b.nh/(G.cw*K)*100;if(v>lim)v=lim}return v};
+b.w=fit(b.w||70);
+const fig=el("figure","fig"),iw=el("div","imw"),rg=el("input"),fi=el("input");
+fig.style.width=b.w+"%";
+rg.type="range";rg.min=5;rg.max=Math.floor(maxPct);rg.step=1;rg.value=b.w;rg.title="Pic size";
+rg.oninput=()=>{b.w=fit(+rg.value);rg.value=b.w;fig.style.width=b.w+"%"};
+rg.onchange=()=>{save();relayout(false)};
+fi.type="file";fi.accept="image/*";fi.hidden=true;
+fi.onchange=()=>{if(fi.files[0])shrink(fi.files[0],(u,nw,nh)=>{b.src=u;b.nw=nw;b.nh=nh;render()})};
+if(b.src){const im=el("img");im.src=b.src;im.alt="";im.draggable=false;if(b.nw&&b.nh)im.style.aspectRatio=b.nw+"/"+b.nh;iw.append(im);
+if(!o.ro){im.title="Drag kore move koro (double click = reset)";drag(im,b,ap);
+const rs=el("div","rs","◢");rs.title="Drag kore boro/choto koro";iw.append(rs);
+rs.onpointerdown=ev=>{ev.preventDefault();ev.stopPropagation();const x0=ev.clientX,w0=fig.getBoundingClientRect().width;rs.setPointerCapture(ev.pointerId);
+rs.onpointermove=e=>{b.w=fit((w0+2*(e.clientX-x0))/(G.cw*K)*100);fig.style.width=b.w+"%";rg.value=b.w};
+const up=()=>{rs.onpointermove=null;rs.onpointerup=null;rs.onpointercancel=null;save();relayout(false)};rs.onpointerup=up;rs.onpointercancel=up}}}
+else{const u=el("div","up","Pic upload korte click koro");u.onclick=()=>fi.click();iw.append(u)}
+fig.append(iw,fi,mk("cap",b.cap||"",v=>b.cap=v,"Caption"));
+body=fig;
+if(tb)tb.append(rg,btn("Pic change",()=>fi.click(),"Pic change koro"));
 }
 else if(b.t=="tbl"){
-const R=()=>render();
-tb.prepend(btn("+Row",()=>{b.c.push(b.c[0].map(()=>""));R()}),btn("−Row",()=>{if(b.c.length>1){b.c.pop();R()}}),btn("+Col",()=>{b.c.forEach(r=>r.push(""));R()}),btn("−Col",()=>{if(b.c[0].length>1){b.c.forEach(r=>r.pop());R()}}));
-body=el("div");const cap=ed(b.cap,v=>b.cap=v,"Table caption");cap.className="ed tcap";
-const t=el("table");b.c.forEach((r,ri)=>{const tr=el("tr");r.forEach((c,ci)=>{const td=el(ri?"td":"th","",c);td.contentEditable=true;td.oninput=()=>{b.c[ri][ci]=td.innerHTML;save()};tr.append(td)});t.append(tr)});
-body.append(cap,t)}
-tb.append(btn("✕",()=>{S.pages[p].blocks.splice(i,1);render()},"Delete"));
-w.append(tb,body);return w}
+body=el("div");
+if(!b.cont){const cap=mk("cap",b.cap||"",v=>b.cap=v,"Table caption");cap.className="ed tcap";body.append(cap)}
+const t=el("table");
+b.c.forEach((r,ri)=>{const tr=el("tr");r.forEach((c,ci)=>{const td=el(ri?"td":"th","",c);td.contentEditable=!(b.cont&&ri==0);td._k={b,kind:"c",ri,ci};td.oninput=()=>{b.c[ri][ci]=td.innerHTML;save();sched()};tr.append(td)});t.append(tr)});
+body.append(t);
+if(tb)tb.append(btn("+Row",()=>{b.c.push(b.c[0].map(()=>""));render()}),btn("−Row",()=>{if(b.c.length>(b.cont?2:1)){b.c.pop();render()}}),btn("+Col",()=>{pieces(b).forEach(x=>x.c.forEach(r=>r.push("")));render()}),btn("−Col",()=>{if(b.c[0].length>1){pieces(b).forEach(x=>x.c.forEach(r=>r.pop()));render()}}));
+}
+if(o.ro){w.append(body);return w}
+const fz=d=>()=>{const v=Math.max(6,Math.min(60,(b.fs||S.size)+d));pieces(b).forEach(x=>x.fs=v);render()};
+const hd=btn("✥",()=>{},"Drag kore move koro (double click = reset)");drag(hd,b,ap);
+tb.append(hd,btn("A−",fz(-1),"Font choto"),btn("A+",fz(1),"Font boro"),btn("↑",()=>mvBlock(b,-1),"Upore"),btn("↓",()=>mvBlock(b,1),"Niche"),btn("⟲",()=>{b.dx=b.dy=0;ap();save()},"Position reset"),btn("✕",()=>delBlock(b),"Delete"));
+const gr=el("div","grip","✥");gr.title="Drag kore jekhane khushi move koro (double click = reset)";drag(gr,b,ap);
+w.append(tb,gr,body);return w}
+/* ---- pagination ---- */
+function merge(list){const out=[];for(const b of list){const p=out[out.length-1];
+if(b.cont&&p&&p.id===b.id){if(b.t=="tbl")p.c=p.c.concat(b.c.slice(1));else p.h+=b.h}else{const nb=Object.assign({},b);delete nb.cont;out.push(nb)}}return out}
+function mnode(b){const n=blockEl(b,{ro:1});meas.append(n);return n}
+function mh(n){return{h:n.getBoundingClientRect().height,mb:parseFloat(getComputedStyle(n).marginBottom)||0}}
+function splitText(b,n,space){
+const te=n.querySelector(".ed");if(!te)return null;
+const root=document.createElement("div");root.innerHTML=norm(b.h);
+const tot=ulen(root);if(tot<2)return null;
+const flat=flatTxt(root);
+const H=k=>{te.innerHTML=part(root,0,k);return n.getBoundingClientRect().height};
+let lo=0,hi=tot-1;
+while(lo<hi){const mid=(lo+hi+1)>>1;if(H(mid)<=space)lo=mid;else hi=mid-1}
+let k=lo;if(k<1)return null;
+if(!/\s/.test(flat[k]||" ")&&!/\s/.test(flat[k-1]||" ")){let j=k;while(j>0&&!/\s/.test(flat[j-1]))j--;if(j>0&&k-j<80)k=j}
+if(k<1||k>=tot)return null;
+return[Object.assign({},b,{h:part(root,0,k)}),Object.assign({},b,{h:part(root,k,tot),cont:true,dx:0,dy:0})]}
+function splitTbl(b,space){
+const n=b.c.length;if(n<3)return null;
+const T=r=>{const x=mnode(Object.assign({},b,{c:b.c.slice(0,r)}));const h=x.getBoundingClientRect().height;x.remove();return h};
+let lo=1,hi=n-1;
+while(lo<hi){const m=(lo+hi+1)>>1;if(T(m)<=space)lo=m;else hi=m-1}
+if(lo<2)return null;
+return[Object.assign({},b,{c:b.c.slice(0,lo)}),Object.assign({},b,{c:[b.c[0]].concat(b.c.slice(lo)),cont:true,dx:0,dy:0,cap:""})]}
+function paginate(list,G){
+const avail=G.ch*K-1,pgs=[];let cur=[],used=0;const q=list.slice();
+const nextPage=()=>{pgs.push(cur);cur=[];used=0};
+while(q.length){
+const b=q.shift(),n=mnode(b),m=mh(n);
+if(used+m.h<=avail){cur.push(b);used+=m.h+m.mb;n.remove();continue}
+let sp=null;
+if(b.t=="text")sp=splitText(b,n,avail-used);else if(b.t=="tbl")sp=splitTbl(b,avail-used);
+n.remove();
+if(sp){cur.push(sp[0]);q.unshift(sp[1]);nextPage();continue}
+if(cur.length){nextPage();q.unshift(b);continue}
+cur.push(b);nextPage()}
+if(cur.length||!pgs.length)pgs.push(cur);
+return pgs}
+function layout(){
+const G=geom();setMeas(G);
+const secs=[];let cur=null;
+S.pages.forEach(pg=>{if(!pg.auto||!cur){cur=[];secs.push(cur)}cur.push(...pg.blocks)});
+const out=[];
+secs.forEach(flat=>{paginate(merge(JSON.parse(JSON.stringify(flat))),G).forEach((bl,i)=>out.push({auto:i>0,blocks:bl}))});
+return out}
+function sig(pgs){return pgs.map(p=>(p.auto?"A":"M")+p.blocks.map(b=>b.id+(b.cont?"c":"")+(b.t=="tbl"?b.c.length:b.t=="img"?"i":ulenH(b.h||""))).join(",")).join("|")}
+/* ---- caret keep across re-pagination ---- */
+function getCaret(){
+const s=getSelection();if(!s.rangeCount||!s.anchorNode)return null;
+let e=s.anchorNode.nodeType==3?s.anchorNode.parentElement:s.anchorNode;e=e&&e.closest&&e.closest("[contenteditable=true]");
+if(!e||!e._k||!$("#pg").contains(e))return null;
+const k=e._k,r=document.createRange();r.setStart(e,0);r.setEnd(s.anchorNode,s.anchorOffset);
+const d=document.createElement("div");d.append(r.cloneContents());
+const c={id:k.b.id,kind:k.kind,ci:k.ci||0,off:ulen(d),row:0};
+if(k.kind=="t"){outer:for(const pg of S.pages)for(const b of pg.blocks){if(b===k.b)break outer;if(b.id===k.b.id&&b.t=="text")c.off+=ulenH(b.h)}}
+else if(k.kind=="c"){let base=0,pl=0,seen=0;outer2:for(const pg of S.pages)for(const b of pg.blocks){if(b.id!==k.b.id)continue;if(seen>0)base+=pl-1;if(b===k.b)break outer2;pl=b.c.length;seen++}c.row=base+k.ri}
+return c}
+function setCaret(c){
+if(!c)return;
+const ps=[];S.pages.forEach(pg=>pg.blocks.forEach(b=>{if(b.id===c.id)ps.push(b)}));
+if(!ps.length)return;
+let tb=null,ri=0,off=c.off;
+if(c.kind=="t"){let rem=off;for(let i=0;i<ps.length;i++){const L=ulenH(ps[i].h);if(rem<L||i==ps.length-1){tb=ps[i];off=Math.min(rem,L);break}rem-=L}}
+else if(c.kind=="c"){let base=0,pl=0;for(let i=0;i<ps.length;i++){if(i>0)base+=pl-1;const r=c.row-base;if(r>=(i?1:0)&&r<ps[i].c.length){tb=ps[i];ri=r;break}pl=ps[i].c.length}}
+else tb=ps[0];
+if(!tb)return;
+const e=[...document.querySelectorAll("#pg [contenteditable=true]")].find(x=>x._k&&x._k.b===tb&&x._k.kind===c.kind&&(c.kind!="c"||(x._k.ri===ri&&x._k.ci===c.ci)));
+if(!e)return;
+e.focus({preventScroll:true});
+const[n,o]=locate(e,off),r=document.createRange();r.setStart(n,o);r.collapse(true);
+const s=getSelection();s.removeAllRanges();s.addRange(r);
+const rc=r.getBoundingClientRect();if(rc.height&&(rc.bottom>innerHeight-40||rc.top<40))scrollBy(0,rc.top-innerHeight/2)}
+function relayout(force){const c=getCaret(),np=layout();if(!force&&sig(np)===sig(S.pages))return;S.pages=np;pages();setCaret(c);save()}
+/* ---- block operations ---- */
+const BT={text:{t:"text",h:""},h:{t:"h",h:""},img:{t:"img",src:"",cap:"Fig: ",w:70},tbl:{t:"tbl",cap:"Table: ",c:[["Parameter","Value"],["",""],["",""]]}};
+function secOf(p){let s=p;while(s>0&&S.pages[s].auto)s--;let e=s+1;while(e<S.pages.length&&S.pages[e].auto)e++;return[s,e]}
+function add(p,t){
+const nb=JSON.parse(JSON.stringify(BT[t]));nb.id=uid();
+const[s,e]=secOf(p),flat=[];
+for(let x=s;x<e;x++)flat.push(...S.pages[x].blocks);
+let at=0;for(let x=s;x<=p;x++)at+=S.pages[x].blocks.length;
+while(at>0&&at<flat.length&&flat[at].cont&&flat[at].id===flat[at-1].id)at++;
+flat.splice(at,0,nb);S.pages.splice(s,e-s,{auto:false,blocks:flat});render();
+const t2=[...document.querySelectorAll("#pg [contenteditable=true]")].find(x=>x._k&&x._k.b.id===nb.id);
+if(t2){t2.scrollIntoView({block:"center"});if(nb.t!="img")t2.focus()}}
+function mvBlock(b,d){
+const pi=S.pages.findIndex(pg=>pg.blocks.includes(b));if(pi<0)return;
+const[s,e]=secOf(pi),flat=[];for(let x=s;x<e;x++)flat.push(...S.pages[x].blocks);
+const m=merge(JSON.parse(JSON.stringify(flat))),i=m.findIndex(x=>x.id===b.id),j=i+d;
+if(i<0||j<0||j>=m.length)return;
+[m[i],m[j]]=[m[j],m[i]];S.pages.splice(s,e-s,{auto:false,blocks:m});render()}
+function delBlock(b){S.pages.forEach(pg=>{pg.blocks=pg.blocks.filter(x=>x.id!==b.id)});render()}
 function pages(){const root=$("#pg");root.innerHTML="";
 S.pages.forEach((pg,p)=>{
-const bar=el("div","pgbar",`<span>Page ${p+1}</span>`);bar.append(btn("Page delete",()=>{if(S.pages.length>1&&confirm("Ei page delete korbe?")){S.pages.splice(p,1);render()}}));
-const page=el("div","page");pg.blocks.forEach((_,i)=>page.append(blockEl(p,i)));
-const ab=el("div","addbar");ab.append(btn("+ Text",()=>add(p,"text")),btn("+ Heading",()=>add(p,"h")),btn("+ Picture",()=>add(p,"img")),btn("+ Table",()=>add(p,"tbl")));page.append(ab);
+const bar=el("div","pgbar",`<span>Page ${p+2}${pg.auto?" (auto - ager page er text/jinis choliye ashche)":""}</span>`);
+if(!pg.auto)bar.append(btn("Page delete",()=>{if(S.pages.filter(x=>!x.auto).length>1&&confirm("Ei page (ar er overflow page gula) delete korbe?")){let e=p+1;while(e<S.pages.length&&S.pages[e].auto)e++;S.pages.splice(p,e-p);render()}}));
+const page=el("div","page");pg.blocks.forEach(b=>page.append(blockEl(b)));
 if(S.pnum)page.append(el("div","pn",String(p+2)));
-root.append(bar,page)});look()}
-function render(){cover();pages();save()}
+const ab=el("div","addbar");ab.append(btn("+ Text",()=>add(p,"text")),btn("+ Heading",()=>add(p,"h")),btn("+ Picture",()=>add(p,"img")),btn("+ Table",()=>add(p,"tbl")));
+root.append(bar,page,ab)});
+look()}
+function render(){cover();relayout(true)}
 function init(){
-const f=$("#font");opt(f,FONTS.map(([n,v])=>[v,n]),S.font);f.onchange=()=>{S.font=f.value;look();save()};
-const sz=$("#size");sz.value=S.size;sz.oninput=()=>{S.size=+sz.value||12;look();save()};
+const f=$("#font");opt(f,FONTS.map(([n,v])=>[v,n]),S.font);f.onchange=()=>{S.font=f.value;look();relayout(false);save()};
+const sz=$("#size");sz.value=S.size;sz.oninput=()=>{S.size=+sz.value||12;look();sched();save()};
 const pn=$("#pnum");pn.checked=S.pnum;pn.onchange=()=>{S.pnum=pn.checked;render()};
 [["B","bold"],["I","italic"],["U","underline"],["⇤","justifyLeft"],["≡","justifyCenter"],["⇥","justifyRight"],["☰","justifyFull"]].forEach(([l,c])=>{const b=btn(l,()=>document.execCommand(c));b.onmousedown=e=>e.preventDefault();$("#fmt").append(b)});
+const ps=$("#psz");opt(ps,Object.entries(PS).map(([k,v])=>[k,v[2]+" ("+v[0]+" x "+v[1]+" mm)"]),S.pg);ps.onchange=()=>{S.pg=ps.value;render()};
+const M4={t:$("#mt"),b:$("#mb"),l:$("#ml"),r:$("#mr")};
+const syncM=()=>{for(const k in M4)M4[k].value=S.mg[k]};syncM();
+for(const k in M4)M4[k].oninput=()=>{S.mg[k]=Math.max(0,+M4[k].value||0);look();sched();save()};
+$("#mall").oninput=()=>{const v=Math.max(0,+$("#mall").value||0);S.mg={t:v,b:v,l:v,r:v};syncM();look();sched();save()};
 form();
 const rt=$("#rt");rt.value=S.type;rt.onchange=()=>{S.type=rt.value;form();cover();save()};
 const gp=$("#grp");gp.checked=S.group;gp.onchange=()=>{S.group=gp.checked;form();cover();save()};
 $("#szm").onclick=()=>setFs((+$("#szv").value||12)-1);$("#szp").onclick=()=>setFs((+$("#szv").value||12)+1);$("#szv").onchange=()=>setFs(+$("#szv").value);
 $("#szr").onclick=()=>{if(sel){delete S.cs[sel];cover();pick(sel);save()}};
 $("#lgf").onchange=e=>{if(e.target.files[0])shrink(e.target.files[0],u=>{S.logo=u;cover();save()})};
-$("#addp").onclick=()=>{S.pages.push({blocks:[{t:"text",h:""}]});render();scrollTo(0,document.body.scrollHeight)};
+$("#addp").onclick=()=>{S.pages.push({auto:false,blocks:[{id:uid(),t:"text",h:""}]});render();scrollTo(0,document.body.scrollHeight)};
 $("#pdf").onclick=()=>print();
 $("#reset").onclick=()=>{if(confirm("Sob kichu muche abar shuru korbe?")){S=def();try{localStorage.removeItem("labrep1")}catch(e){}location.reload()}};
 render()}
-init();
+ensureDims().then(()=>{init();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>relayout(false))});
 (function(){const s=$("#sp1"),h=$("#sh");"রিপোর্ট বানা আইলসা".split(" ").forEach((w,i)=>{const x=el("span","w",w);x.style.animationDelay=(.3+i*.35)+"s";h.append(x)});const done=()=>{s.classList.add("out");setTimeout(()=>s.remove(),800)};s.onclick=done;setTimeout(done,matchMedia("(prefers-reduced-motion:reduce)").matches?700:3600)})();
 </script></body></html>
