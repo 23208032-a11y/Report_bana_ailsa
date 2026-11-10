@@ -21,8 +21,8 @@ button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--p
 button:hover{background:var(--ab)}
 button.pri{background:var(--ac);color:#fff;border-color:var(--ac)}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
-main{flex:1;min-width:0;overflow-x:auto;padding:20px 12px 60px}
-.page{width:210mm;height:297mm;background:#fff;color:#000;margin:0 auto 22px;padding:18mm 20mm 22mm;position:relative;box-shadow:0 2px 12px rgba(0,0,0,.25)}#pg .page{margin-bottom:6px}
+main{flex:1;min-width:0;padding:20px 12px 60px}
+.page{width:210mm;height:297mm;background:#fff;color:#000;margin:0 auto 22px;padding:18mm 20mm 22mm;position:relative;box-shadow:0 2px 12px rgba(0,0,0,.25)}#pg .page{margin-bottom:0}
 .pn{position:absolute;bottom:8mm;left:0;right:0;text-align:center;font-size:.85em}
 .pgbar{display:flex;justify-content:space-between;align-items:center;width:210mm;margin:0 auto 6px;color:var(--mu);font-size:12px}
 .blk{position:relative;margin:0 0 .8em;border-radius:4px}
@@ -45,8 +45,8 @@ table{border-collapse:collapse;width:100%;margin-top:4px}
 td,th{border:1px solid #000;padding:4px 7px;min-width:40px;outline:none;vertical-align:top}
 th{background:#f1f1f1}
 .tcap{text-align:center;font-weight:600;margin-bottom:2px}
-.addbar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:0 auto 22px;padding:6px 0 0}
-.addbar button{background:var(--pn);color:var(--tx);border-color:var(--bd)}
+.pwrap{display:flex;align-items:flex-start;gap:14px;width:max-content;margin:0 auto 22px}.pcol{flex:none}.rail{position:sticky;top:14px;right:12px;margin-top:26px;display:flex;flex-direction:column;gap:6px;width:104px;flex:none;padding:8px;background:var(--pn);border:1px solid var(--bd);border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.12);z-index:6}.rail small{font-size:11px;color:var(--mu);text-align:center;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.rail button{display:flex;align-items:center;gap:8px;justify-content:flex-start;padding:8px 10px;background:var(--pn);color:var(--tx);border:1px solid var(--bd);border-radius:7px;cursor:pointer;font-size:13px;font-weight:600}.rail button:hover{background:var(--ac);color:#fff;border-color:var(--ac)}.rail button b{width:18px;text-align:center;font-size:15px}
 .cv{text-align:left}
 .cv .lg{display:block;margin:0 auto;height:34mm}
 .cv .u{text-align:center;font-weight:700;font-size:1.15em;margin-top:4px}
@@ -67,13 +67,14 @@ aside{width:340px!important}aside label.gl{display:flex;align-items:center;gap:1
 .mv{cursor:move;touch-action:none}.mv.sel{outline:1.5px dashed #2563eb;outline-offset:2px}.tb{font-size:13px}.cv .tn{font-weight:700;font-size:1.1em;font-family:Arial,Helvetica,sans-serif}.cv .sm{font-size:.7em}.cv .mb{margin-bottom:.6em}
 @media (max-width:900px){.app{flex-direction:column}aside{width:100%;height:auto;position:static;border-right:0;border-bottom:1px solid var(--bd)}}
 
+@media(max-width:900px){.rail{width:44px;padding:6px 4px}.rail button span,.rail small{display:none}.rail button{justify-content:center;padding:8px 4px}}
 #meas{position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none}
 .grip{position:absolute;left:-28px;top:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--ac);color:#fff;border-radius:6px;cursor:move;touch-action:none;font-size:14px;opacity:.35;user-select:none;z-index:4}
 .blk:hover>.grip,.blk:focus-within>.grip{opacity:1}
 .imw{position:relative}
 .rs{position:absolute;right:-8px;bottom:-8px;width:20px;height:20px;border-radius:50%;background:var(--ac);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:nwse-resize;touch-action:none;z-index:4;user-select:none}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:0 8px}
-@media print{#sp1{display:none!important}html,body{background:#fff}aside,.pgbar,.addbar,.tb,.grip,.rs{display:none!important}main{padding:0;overflow:visible}.page,#pg .page{margin:0!important;box-shadow:none;overflow:hidden;page-break-after:always;break-after:page}.page.last{page-break-after:auto;break-after:auto}.blk{outline:none!important}.up{display:none}.ed:empty:before{content:none}}
+@media print{#sp1{display:none!important}html,body{background:#fff}aside,.pgbar,.rail,.tb,.grip,.rs{display:none!important}main{padding:0;overflow:visible}.pwrap,.pcol{display:block;width:auto;margin:0;gap:0}.page,#pg .page{margin:0!important;box-shadow:none;overflow:hidden;page-break-after:always;break-after:page}.page.last{page-break-after:auto;break-after:auto}.blk{outline:none!important}.up{display:none}.ed:empty:before{content:none}}
 </style><style id="pgst"></style></head>
 <body>
 <div id="sp1"><h1 id="sh"></h1><div class="ln"></div><div class="by">by MD Ashrafuzzaman Akash</div><small>Click kore dhuko</small></div>
@@ -132,8 +133,14 @@ d.onkeydown=e=>{if(e.key==="Enter"&&!e.isComposing){e.preventDefault();if(!docum
 d.onpaste=e=>{e.preventDefault();const t=(e.clipboardData||window.clipboardData).getData("text/plain");document.execCommand("insertHTML",false,esc(t).replace(/\r?\n/g,"<br>"))};
 return d}
 function opt(sel,list,cur){list.forEach(([v,l])=>{const o=el("option","",l);o.value=v;if(v==cur)o.selected=true;sel.append(o)})}
-function shrink(file,cb){const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1800/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.85),c.width,c.height)};im.src=r.result};r.readAsDataURL(file)}
-function ensureDims(){const ps=[];S.pages.forEach(pg=>pg.blocks.forEach(b=>{if(b.t=="img"&&b.src&&!b.nw)ps.push(new Promise(res=>{const im=new Image();im.onload=()=>{b.nw=im.naturalWidth;b.nh=im.naturalHeight;res()};im.onerror=res;im.src=b.src}))}));return Promise.all(ps)}
+/* PDF size: images are embedded as-is by the browser, so keep them small. Pictures max 1400px (~150dpi on A4), logo max 500px, JPEG q.8, white bg for PNG transparency */
+const IMG_MAX=1400,LOGO_MAX=500,IMG_Q=.8,BIG=150000;
+function resample(src,max,q){return new Promise(res=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*k));c.height=Math.max(1,Math.round(im.height*k));const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);res({u:c.toDataURL("image/jpeg",q),w:c.width,h:c.height})};im.onerror=()=>res(null);im.src=src})}
+function shrink(file,cb,max){const r=new FileReader();r.onload=()=>resample(r.result,max||IMG_MAX,IMG_Q).then(o=>{if(o)cb(o.u,o.w,o.h)});r.readAsDataURL(file)}
+function ensureDims(){const ps=[];
+S.pages.forEach(pg=>pg.blocks.forEach(b=>{if(b.t=="img"&&b.src){if(b.src.length>BIG)ps.push(resample(b.src,IMG_MAX,IMG_Q).then(o=>{if(o&&o.u.length<b.src.length){b.src=o.u;b.nw=o.w;b.nh=o.h}}));else if(!b.nw)ps.push(new Promise(res=>{const im=new Image();im.onload=()=>{b.nw=im.naturalWidth;b.nh=im.naturalHeight;res()};im.onerror=res;im.src=b.src}))}}));
+if(S.logo&&S.logo.length>BIG)ps.push(resample(S.logo,LOGO_MAX,.85).then(o=>{if(o&&o.u.length<S.logo.length)S.logo=o.u}));
+return Promise.all(ps).then(()=>{if(ps.length)save()})}
 /* ---- text unit helpers: 1 unit = 1 text char or 1 <br> ---- */
 function ulen(root){let n=0;const w=document.createTreeWalker(root,5);let x;while(x=w.nextNode()){if(x.nodeType==3)n+=x.data.length;else if(x.nodeName=="BR")n++}return n}
 function ulenH(h){const d=document.createElement("div");d.innerHTML=h;return ulen(d)}
@@ -167,7 +174,7 @@ const m=$("#mem");m.innerHTML="";if(S.group){S.members.forEach((x,i)=>{const r=e
 function look(){const G=geom();
 [$("#cvp"),...document.querySelectorAll("#pg .page")].forEach(x=>{const s=x.style;s.width=G.W+"mm";s.height=G.H+"mm";s.padding=`${G.mt}mm ${G.mr}mm ${G.mb}mm ${G.ml}mm`;s.fontFamily=S.font;s.fontSize=S.size+"pt"});
 document.querySelectorAll("#pg .pn").forEach(x=>x.style.bottom=Math.max(2,G.mb/2-2)+"mm");
-document.querySelectorAll(".pgbar,.addbar").forEach(x=>x.style.width=G.W+"mm");
+document.querySelectorAll(".pgbar").forEach(x=>x.style.width=G.W+"mm");
 document.querySelectorAll("#pg .page").forEach((x,i,a)=>x.classList.toggle("last",i==a.length-1));
 $("#pgst").textContent=`@page{size:${G.W}mm ${G.H}mm;margin:0}`}
 function pieces(b){return S.pages.flatMap(pg=>pg.blocks.filter(x=>x.id===b.id))}
@@ -317,8 +324,9 @@ const bar=el("div","pgbar",`<span>Page ${fmtNum(p+1)}${pg.auto?" (auto - ager pa
 if(!pg.auto)bar.append(btn("Page delete",()=>{if(S.pages.filter(x=>!x.auto).length>1&&confirm("Ei page (ar er overflow page gula) delete korbe?")){let e=p+1;while(e<S.pages.length&&S.pages[e].auto)e++;S.pages.splice(p,e-p);render()}}));
 const page=el("div","page");pg.blocks.forEach(b=>page.append(blockEl(b)));
 if(S.pnum)page.append(el("div","pn",fmtNum(p+1)));
-const ab=el("div","addbar");ab.append(btn("+ Text",()=>add(p,"text")),btn("+ Heading",()=>add(p,"h")),btn("+ Picture",()=>add(p,"img")),btn("+ Table",()=>add(p,"tbl")));
-root.append(bar,page,ab)});
+const rail=el("div","rail",'<small>Add</small>');
+[["text","T","Text"],["h","H","Heading"],["img","▣","Picture"],["tbl","▦","Table"]].forEach(([t,i,l])=>{const b=el("button","",`<b>${i}</b><span>${l}</span>`);b.title=l+" add koro (ei page e)";b.onclick=()=>add(p,t);rail.append(b)});
+const col=el("div","pcol"),wrap=el("div","pwrap");col.append(bar,page);wrap.append(col,rail);root.append(wrap)});
 look()}
 function render(){cover();relayout(true)}
 function init(){
@@ -337,7 +345,7 @@ const rt=$("#rt");rt.value=S.type;rt.onchange=()=>{S.type=rt.value;form();cover(
 const gp=$("#grp");gp.checked=S.group;gp.onchange=()=>{S.group=gp.checked;form();cover();save()};
 $("#szm").onclick=()=>setFs((+$("#szv").value||12)-1);$("#szp").onclick=()=>setFs((+$("#szv").value||12)+1);$("#szv").onchange=()=>setFs(+$("#szv").value);
 $("#szr").onclick=()=>{if(sel){delete S.cs[sel];cover();pick(sel);save()}};
-$("#lgf").onchange=e=>{if(e.target.files[0])shrink(e.target.files[0],u=>{S.logo=u;cover();save()})};
+$("#lgf").onchange=e=>{if(e.target.files[0])shrink(e.target.files[0],u=>{S.logo=u;cover();save()},LOGO_MAX)};
 $("#addp").onclick=()=>{S.pages.push({auto:false,blocks:[{id:uid(),t:"text",h:""}]});render();scrollTo(0,document.body.scrollHeight)};
 $("#pdf").onclick=()=>print();
 $("#reset").onclick=()=>{if(confirm("Sob kichu muche abar shuru korbe?")){S=def();try{localStorage.removeItem("labrep1")}catch(e){}location.reload()}};
